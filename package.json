@@ -3,8 +3,8 @@
 	"displayName": "logerrorcode",
 	"description": "Insert unique error code in your log statements",
 	"publisher": "pcarion",
-	"repository": "https://github.com/pcarion/vscode-log-error-code.git",
-	"version": "0.0.1",
+	"repository": "https://github.com/pcarion/vscode-logerrorcode.git",
+	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.37.0"
 	},
