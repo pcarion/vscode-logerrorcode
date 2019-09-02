@@ -1,0 +1,96 @@
+{
+	"name": "logerrorcode",
+	"displayName": "logerrorcode",
+	"description": "Insert unique error code in your log statements",
+	"publisher": "pcarion",
+	"repository": "https://github.com/pcarion/vscode-log-error-code.git",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.37.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.insertLogErrorCode",
+		"onCommand:extension.resetLogErrorCode"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.insertLogErrorCode",
+				"title": "Insert log error code",
+				"category": "InsertLog"
+			},
+			{
+				"command": "extension.resetLogErrorCode",
+				"title": "Reset log error code",
+				"category": "InsertLog"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Insert Log Error Code",
+			"properties": {
+				"insertlogerrorcode.serviceURL" :{
+					"type": ["string", "null"],
+					"default": null,
+					"description": "URL of the service used to return error codes (null if no external service used)"
+				},
+				"insertlogerrorcode.serviceFunctionKey" :{
+					"type": ["string", "null"],
+					"default": null,
+					"description": "the function key to use to access the service function (null if no external service used)"
+				},
+				"insertlogerrorcode.projectName" :{
+					"type": "string",
+					"default": "project01",
+					"description": "name of the project to retrieve counters for"
+				},
+				"insertlogerrorcode.counterIncrementValue" :{
+					"type": "integer",
+					"default": 10,
+					"description": "increment to use when requesting error code to the remote service"
+				},
+				"insertlogerrorcode.logStatementToInsert" :{
+					"type": "string",
+					"default": "log.error({ location: %%counter%% }, 'error');",
+					"description": "statement to insert on invokation. %%counter%% is replaced with the value of the counter"
+				},
+				"insertlogerrorcode.showDebugInformation" :{
+					"type": "boolean",
+					"default": false,
+					"description": "set to true to have extension debug information in the output channel"
+				}
+			}
+		},
+		"keybindings": [
+			{
+				"command": "extension.insertLogErrorCode",
+				"key": "alt+ctrl+e",
+				"mac": "alt+cmd+e",
+				"when": "editorTextFocus"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^5.2.6",
+		"@types/node": "^10.12.21",
+		"@types/vscode": "^1.37.0",
+		"glob": "^7.1.4",
+		"mocha": "^6.1.4",
+		"typescript": "^3.3.1",
+		"tslint": "^5.12.1",
+		"vscode-test": "^1.0.2"
+	},
+	"dependencies": {
+		"axios": "^0.19.0"
+	}
+}
