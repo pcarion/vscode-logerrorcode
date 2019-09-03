@@ -1,6 +1,6 @@
-# logerrorcode vscode extension
+# Functionality
 
-This extension for Visual Studio Code allows you to easily insert into your code a log error statement with a unique number,
+This extension for [Visual Studio Code]((https://github.com/Microsoft/vscode)) allows you to easily insert into your code a log error statement with a unique number,
 making it easy to find the location of an error in production.
 
 Why?
@@ -33,35 +33,25 @@ With those unique numbers, it becomes very easy to quickly find a log found in y
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+This extension works better with the associated Azure function which delivers counter blocks for each configured project.
+
+The code of this azure function ias available here: https://github.com/pcarion/vscode-logerrorcode-function
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
 This extension contributes the following settings:
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+* `insertlogerrorcode.serviceURL`: URL of the service used to return error codes (null if no external service used)
+* `insertlogerrorcode.serviceFunctionKey`: the function key to use to access the service function (null if no external service used)
+* `insertlogerrorcode.projectName`: name of the project to retrieve counters for
+* `insertlogerrorcode.counterIncrementValue`: increment to use when requesting error code to the remote service
+* `insertlogerrorcode.logStatementToInsert`: statement to insert on invokation. %%counter%% is replaced with the value of the counter
+* `insertlogerrorcode.showDebugInformation`: set to true to have extension debug information in the output channel
 
 ## Known Issues
 
-No known issues for know.
+* The system don't behave as expected when you switch between projects ([issue-1](https://github.com/pcarion/vscode-logerrorcode/issues/1))
 
 Feel free to post any issue [here](https://github.com/pcarion/vscode-logerrorcode/issues).
 
-## Release Notes
-
-### 0.0.2
-
-* read the configuration at each invokation to allow changes in settings
-* update README
-* fix git URL
-
-
-### 0.0.1
-
-Initial release of the extension
 
