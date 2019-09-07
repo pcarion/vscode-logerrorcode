@@ -5,6 +5,8 @@ import axios from 'axios';
 
 const LOCAL_COUNTER_INCREMENT = 10;
 
+// message coming from the counter service API
+// also the local storage structure for the counter
 interface CounterDescription {
   counter: number;
   maxCounter: number;
@@ -40,6 +42,7 @@ async function getCounterFromHttpService(
   projectName: string,
   counterIncrementValue: number,
   outputChannel: vscode.OutputChannel,
+  localMaxCounter: number, // value of the maximum value of the local counter (used to resync the remote)
   debug:boolean
 ): Promise<CounterDescription> {
   if (debug) {
@@ -56,6 +59,7 @@ async function getCounterFromHttpService(
             action: 'get',
             increment: counterIncrementValue,
             projectName,
+            localMaxCounter,
           })
           .then(response => {
             if (debug) {
@@ -127,7 +131,7 @@ async function getAndIncrementCounter(
     counterIncrementValue,
     debug,
   } = config;
-  let counterData: CounterDescription | undefined = storage.get('counter');
+  let counterData: CounterDescription | undefined = storage.get(projectName);
   if (debug) {
     outputChannel.appendLine(`counterData: ${JSON.stringify(counterData)}`);
   }
@@ -141,6 +145,7 @@ async function getAndIncrementCounter(
         projectName,
         counterIncrementValue,
         outputChannel,
+        LOCAL_COUNTER_INCREMENT, // localMaxCounter
         debug
       );
     } else {
@@ -160,6 +165,7 @@ async function getAndIncrementCounter(
         projectName,
         counterIncrementValue,
         outputChannel,
+        counterData.maxCounter,
         debug
       );
     } else {
@@ -177,7 +183,7 @@ async function getAndIncrementCounter(
       `update storage with counterData: ${JSON.stringify(counterData)}`
     );
   }
-  await storage.update('counter', counterData);
+  await storage.update(projectName, counterData);
 
   return counter;
 }
@@ -326,3 +332,4 @@ export function activate(context: vscode.ExtensionContext) {
 
 // this method is called when your extension is deactivated
 export function deactivate() {}
+

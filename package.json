@@ -4,7 +4,7 @@
 	"description": "Insert unique error code in your log statements to make them easier to find later",
 	"publisher": "pcarion",
 	"repository": "https://github.com/pcarion/vscode-logerrorcode.git",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"engines": {
 		"vscode": "^1.37.0"
 	},
@@ -60,7 +60,7 @@
 				},
 				"insertlogerrorcode.logStatementToInsert" :{
 					"type": "string",
-					"default": "log.error({ location: %%counter%% }, 'error');",
+					"default": "/* ERR:%%counter%% */",
 					"description": "statement to insert on invokation. %%counter%% is replaced with the value of the counter"
 				},
 				"insertlogerrorcode.showDebugInformation" :{

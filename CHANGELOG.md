@@ -2,7 +2,19 @@
 
 All notable changes to the "logerrorcode" extension will be documented in this file.
 
-## [Unreleased]
+## 0.0.4
+
+### Added
+
+* pass the value of the max local counter to the service so that the service can (re)sync its counter
+
+### Changed
+
+* change default substitution string to be more language agnostic: `/* ERR:%%counter%% */`
+
+### Fixed
+
+* use the name of the project as the storage name for the local counters. This allows the support of multiple counters
 
 ## 0.0.3
 
