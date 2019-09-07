@@ -3,6 +3,8 @@
 This extension for [Visual Studio Code]((https://github.com/Microsoft/vscode)) allows you to easily insert into your code a log error statement with a unique number,
 making it easy to find the location of an error in production.
 
+![Quick Demo](images/ext-video-01.gif)
+
 Why?
 
 Each time you write a line of code which could potentially fail or throw an exception, you need some kind of logging mechanism
@@ -35,7 +37,7 @@ With those unique numbers, it becomes very easy to quickly find a log found in y
 
 This extension works better with the associated Azure function which delivers counter blocks for each configured project.
 
-The code of this azure function ias available here: https://github.com/pcarion/vscode-logerrorcode-function
+The code of this azure function is available here: https://github.com/pcarion/vscode-logerrorcode-function
 
 ## Extension Settings
 

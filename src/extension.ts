@@ -43,7 +43,7 @@ async function getCounterFromHttpService(
   counterIncrementValue: number,
   outputChannel: vscode.OutputChannel,
   localMaxCounter: number, // value of the maximum value of the local counter (used to resync the remote)
-  debug:boolean
+  debug: boolean
 ): Promise<CounterDescription> {
   if (debug) {
     outputChannel.appendLine(
@@ -285,15 +285,26 @@ function readConfiguration(
     counterIncrementValue,
     functionKey,
     logStatementToInsert,
-    debug
+    debug,
   };
 
   return config;
 }
 
-async function resetLogErrorCode(context: vscode.ExtensionContext) {
+async function resetLogErrorCode(
+  context: vscode.ExtensionContext,
+  outputChannel: vscode.OutputChannel,
+  configuration: vscode.WorkspaceConfiguration
+) {
   const storage: vscode.Memento = context.globalState;
-  await storage.update('counter', null);
+  const projectName: string = configuration.get('projectName') || '';
+
+  if (projectName.length > 0) {
+    outputChannel.appendLine(`Clearing local counters for: ${projectName}`);
+    await storage.update(projectName, null);
+  } else {
+    outputChannel.appendLine('No project configured');
+  }
 }
 
 // this method is called when your extension is activated
@@ -325,11 +336,10 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand('extension.resetLogErrorCode', async () => {
-      resetLogErrorCode(context);
+      resetLogErrorCode(context, outputChannel, configuration);
     })
   );
 }
 
 // this method is called when your extension is deactivated
 export function deactivate() {}
-

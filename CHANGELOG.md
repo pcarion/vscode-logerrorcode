@@ -2,7 +2,19 @@
 
 All notable changes to the "logerrorcode" extension will be documented in this file.
 
-## 0.0.4
+## [0.0.5] 2019/09/07
+
+### Added
+
+* add image in README to show how the extension works
+* add date in release note
+* add credit to [Dynamic Dummy Image generator](https://dummyimage.com/) for icon
+
+### Fixed
+
+* the `resetLogErrorCode` command uses the name of the project to clear the local counter
+
+## [0.0.4] 2019/09/07
 
 ### Added
 
@@ -26,7 +38,7 @@ All notable changes to the "logerrorcode" extension will be documented in this f
 
 * improve site documentation by updating README.md file
 * followed guidelines from [this document](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) and [this one](https://code.visualstudio.com/api/references/extension-manifest#marketplace-presentation-tips)
-* added icon image
+* added icon image - using [Dynamic Dummy Image Generator](https://dummyimage.com/) by Russel Heimlich (@kingcool68)
 
 ## 0.0.2
 
